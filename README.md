@@ -8,6 +8,8 @@ Main points to have this module are:
  * reduce load on data storage on cold start
  * unify repetitive actions as: get from cache if not load from db
  
+Note: caches value only if result of load function is converted to true: `!!result === true`
+ 
 # How to use
 ```js
   const Cache = require('advanced-cache')
