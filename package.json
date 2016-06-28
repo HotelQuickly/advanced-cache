@@ -1,0 +1,36 @@
+{
+  "name": "advanced-cache",
+  "version": "0.1.0",
+  "description": "Advanced redis cache with lock function",
+  "main": "index.js",
+  "author": "Dzmitry Frolov <dzmitryfrolov@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HotelQuickly/advanced-cache.git"
+  },
+  "keywords": [
+    "cache",
+    "redis",
+    "redlock",
+    "hotelquickly"
+  ],
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "debug": "^2.2.0",
+    "ioredis": "^2.1.0",
+    "redlock": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=5.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3",
+    "should": "^9.0.2",
+    "should-sinon": "0.0.5",
+    "sinon": "^1.17.4"
+  }
+}
