@@ -32,5 +32,5 @@ Main points to have this module are:
   cache.asString(['country-code', 13], fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
   cache.asSerialized(['user', 12], fetchUserObjectFromSomeWherePromise).then(user => user.fly())
   
-  cache.redis.mget(['country-code:13', 'user:12').then(() => {}) //when you need to get access to redis client
+  cache.redis.mget(['country-code:13', 'user:12']).then(() => {}) //when you need to get access to redis client
 ```
