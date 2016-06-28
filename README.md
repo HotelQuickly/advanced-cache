@@ -28,4 +28,7 @@ Main points to have this module are:
   }
   
   const cache = new Cache(ioRedisOpts, redlockOpts, opts)
+  
+  cache.asString(['country-code', 13], fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
+  cache.asSerialized(['user', 12], fetchUserObjectFromSomeWherePromise).then(user => user.fly())
 ```
