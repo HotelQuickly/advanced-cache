@@ -1,6 +1,6 @@
 {
   "name": "advanced-cache",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Advanced redis cache with lock function",
   "main": "index.js",
   "author": "Dzmitry Frolov <dzmitryfrolov@gmail.com>",
