@@ -21,15 +21,15 @@ Note: caches value only if result of load function is converted to true: `!!resu
     keyPrefix: 'some:'
   }
   const redlockOpts = {
-    retryCount: 1
+    retryCount: 0 //default
   }
   
   const opts = {
-    lockIntervalMs: 50, //time in ms key is locked to load data from store
-    retryIntervalMs: 5  //time failed lock waits before next try
+    lockIntervalMs: 1000, //time in ms key is locked to load data from store (default)
+    retryIntervalMs: 50  //time failed lock waits before next try (default)
   }
   
-  const cache = new Cache(ioRedisOpts, redlockOpts, opts)
+  const cache = new Cache(ioRedisOpts, opts, redlockOpts) //opts and redlockOpts are optional and have defaults
   
   cache.asString(['country-code', 13], fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
   cache.asSerialized(['user', 12], fetchUserObjectFromSomeWherePromise).then(user => user.fly())
