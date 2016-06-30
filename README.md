@@ -13,6 +13,7 @@ Note: caches value only if result of load function is converted to true: `!!resu
 # How to use
 ```js
   const Cache = require('advanced-cache')
+  const CachePolicy = require('advanced-cache').CachePolicy
   
   const ioRedisOpts = {
     port: 6379,
@@ -30,11 +31,22 @@ Note: caches value only if result of load function is converted to true: `!!resu
   }
   
   const cache = new Cache(ioRedisOpts, opts, redlockOpts) //opts and redlockOpts are optional and have defaults
-  
-  const countryCodePolicy = new CachePolicy([country-code', 5], 24 * 60 * 60)
-  const userPolicy = new CachePolicy(['user', 12], 60 * 60)
-  cache.asString(countryCodePolicy, fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
-  cache.asSerialized(userPolicy, fetchUserObjectFromSomeWherePromise).then(user => user.fly())
-  
+
+  //using CachePolicy
+  const countryCachePolicy = new CachePolicy(['country-code', 5], 24 * 60 * 60)
+  const userCachePolicy = new CachePolicy(['user', 12], 60 * 60)
+  cache.asString(countryCachePolicy, fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
+  cache.asSerialized(userCachePolicy, fetchUserObjectFromSomeWherePromise).then(user => user.fly())
+
+  //using custom policy object
+  const myPolicy = {
+    key: ['country-code', 5],
+    ttl: 24 * 60 * 60
+  }
+  cache.asString(myPolicy, fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
+
+  //using key and ttl as params
+  cache.asString(['country-code', 5], 24 * 60 * 60, fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
+
   cache.redis.mget(['country-code:13', 'user:12']).then(() => {}) //when you need to get access to redis client
 ```
