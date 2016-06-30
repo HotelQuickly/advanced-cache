@@ -1,3 +1,5 @@
 'use strict'
 
-module.exports = require('./lib/cache')
+exports = module.exports = require('./lib/cache')
+
+exports.CachePolicy = require('./lib/model/policy')

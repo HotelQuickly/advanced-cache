@@ -31,8 +31,10 @@ Note: caches value only if result of load function is converted to true: `!!resu
   
   const cache = new Cache(ioRedisOpts, opts, redlockOpts) //opts and redlockOpts are optional and have defaults
   
-  cache.asString(['country-code', 13], fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
-  cache.asSerialized(['user', 12], fetchUserObjectFromSomeWherePromise).then(user => user.fly())
+  const countryCodePolicy = new CachePolicy([country-code', 5], 24 * 60 * 60)
+  const userPolicy = new CachePolicy(['user', 12], 60 * 60)
+  cache.asString(countryCodePolicy, fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
+  cache.asSerialized(userPolicy, fetchUserObjectFromSomeWherePromise).then(user => user.fly())
   
   cache.redis.mget(['country-code:13', 'user:12']).then(() => {}) //when you need to get access to redis client
 ```

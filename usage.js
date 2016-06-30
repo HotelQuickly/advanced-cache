@@ -1,6 +1,7 @@
 'use strict'
 
 const Cache = require('./index')
+const CachePolicy = require('./index').CachePolicy
 const Promise = require('bluebird')
 const debug = require('debug')('usage')
 
@@ -10,15 +11,16 @@ const cache = new Cache({
   keyPrefix: 'awesome:'
 })
 
+const policy = new CachePolicy(['code', 2], 60)
 
 function loadFn() {
   return Promise.delay(100).then(() => Promise.resolve('BY'))
 }
 
 Promise.join(
-  cache.asString(['code', 2], 60, loadFn).then(() => debug('1st finished')),
-  cache.asString(['code', 2], 60, loadFn).then(() => debug('2nd finished')),
-  cache.asString(['code', 2], 60, loadFn).then(() => debug('3rd finished')),
+  cache.asString(policy, loadFn).then(() => debug('1st finished')),
+  cache.asString(policy, loadFn).then(() => debug('2nd finished')),
+  cache.asString(policy, loadFn).then(() => debug('3rd finished')),
   function () {
     debug('all finished')
   }
