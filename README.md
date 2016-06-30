@@ -13,7 +13,7 @@ Note: caches value only if result of load function is converted to true: `!!resu
 # How to use
 ```js
   const Cache = require('advanced-cache')
-  const CachePolicy = require('advanced-cache').CachePolicy
+  const CachePolicy = Cache.CachePolicy
   
   const ioRedisOpts = {
     port: 6379,
