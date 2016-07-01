@@ -52,6 +52,6 @@ Note: caches value only if result of load function is converted to true: `!!resu
 ```
 
 # How to bypass cache
-During development sometimes it handy just bypass cache and fetch data directly  from load function.
+During development sometimes it handy just bypass cache and fetch data directly from load function.
 To make it happen add environment variable **ADVANCED_CACHE_BYPASS_CACHE** equal to *bypass*
 Though it will work only if your **NODE_ENV** equals *development*
