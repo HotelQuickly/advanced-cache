@@ -1,6 +1,6 @@
 {
   "name": "advanced-cache",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Advanced redis cache with lock function",
   "main": "index.js",
   "author": "Dzmitry Frolov <dzmitryfrolov@gmail.com>",
@@ -16,21 +16,29 @@
     "hotelquickly"
   ],
   "dependencies": {
-    "bluebird": "^3.4.1",
+    "bluebird": "^3.4.7",
     "debug": "^2.2.0",
-    "ioredis": "^2.1.0",
-    "redlock": "^2.0.0"
+    "ioredis": "^2.5.0",
+    "node-cache": "^4.1.1",
+    "redlock": "^2.1.0"
   },
   "engines": {
     "node": ">=5.0.0"
   },
   "scripts": {
-    "test": "mocha ./test"
+    "test": "npm run utest && npm run eslint",
+    "utest": "mocha $(find ./lib -name *.test.js)",
+    "eslint": "eslint *.js ./lib/** ./test/**"
   },
   "devDependencies": {
-    "mocha": "^2.5.3",
-    "should": "^9.0.2",
-    "should-sinon": "0.0.5",
-    "sinon": "^1.17.4"
+    "@hotelquickly/eslint-config-hotelquickly": "1.2.0",
+    "eslint": "^3.15.0",
+    "mocha": "^3.2.0",
+    "should": "^11.2.0",
+    "should-sinon": "^0.0.5",
+    "sinon": "^1.17.7"
+  },
+  "eslintConfig": {
+    "extends": "@hotelquickly/eslint-config-hotelquickly"
   }
 }

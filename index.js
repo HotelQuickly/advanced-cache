@@ -1,5 +1,7 @@
 'use strict'
 
-exports = module.exports = require('./lib/cache')
-
-exports.CachePolicy = require('./lib/model/policy')
+module.exports = {
+  RedisCache: require('./lib/redis-cache'),
+  MemoryCache: require('./lib/memory-cache'),
+  CachePolicy: require('./lib/cache-policy')
+}
