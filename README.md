@@ -38,7 +38,7 @@ Note: caches value only if result of load function is converted to true: `!!resu
   cache.asString(countryCachePolicy, fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
   cache.asSerialized(userCachePolicy, fetchUserObjectFromSomeWherePromise).then(user => user.fly())
 
- //when you need direct access to redis client directly
+ //when you need direct access to redis client
   cache.redis.mget(['country-code:13', 'user:12']).then(() => {})
 ```
 
