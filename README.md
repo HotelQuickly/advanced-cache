@@ -7,12 +7,11 @@ Main points to have this module are:
  
 Note: caches value only if result of load function is converted to true: `!!result === true`
  
-# How to use
+# How to use RedisCache
 ```js
   const advancedCache = require('advanced-cache')
   
   const RedisCache = advancedCache.RedisCache
-  const MemoryCache = advancedCache.MemoryCache
   const CachePolicy = advancedCache.CachePolicy
   
   const ioRedisOpts = {
@@ -35,14 +34,29 @@ Note: caches value only if result of load function is converted to true: `!!resu
 
   const countryCachePolicy = new CachePolicy(['country-code', 5], 24 * 60 * 60)
   const userCachePolicy = new CachePolicy(['user', 12], 60 * 60)
-  cache.asString(countryCachePolicy, fetchCountryStringCodeFromSomeWherePromise).then(countryCode => {})
-  cache.asSerialized(userCachePolicy, fetchUserObjectFromSomeWherePromise).then(user => user.fly())
-
+  cache.stringFetch(countryCachePolicy, loadAsStringPromise).then(countryCode => {})
+  cache.serializedFetch(userCachePolicy, loadAsObjectPromise).then(user => user.fly())
  //when you need direct access to redis client
   cache.redis.mget(['country-code:13', 'user:12']).then(() => {})
 ```
 
+# How to use MemoryCache
+```js
+  const advancedCache = require('advanced-cache')
+
+  const MemoryCache = advancedCache.MemoryCache
+  const CachePolicy = advancedCache.CachePolicy
+
+  const cache = new MemoryCache()
+  
+  const countryCachePolicy = new CachePolicy(['country-code', 5], 24 * 60 * 60)
+  cache.fetch(countryCachePolicy, loadPromise).then(countryCode => {})
+ //when you need direct access to NodeCache
+  cache.set(countryCachePolicy.key, someValue, countryCachePolicy.ttl)
+```
+
 # How to bypass cache
-During development sometimes it handy just bypass cache and fetch data directly from load function.
-<br />To make it happen add environment variable **ADVANCED_CACHE_BYPASS_CACHE** equal to *1*
+Sometimes during development it handy just bypass cache and fetch data directly from load function
+<br />To bypass RedisCache add environment variable **ADVANCED_CACHE_BYPASS_REDIS_CACHE** equal to *1*
+<br />To bypass MemoryCache add environment variable **ADVANCED_CACHE_BYPASS_MEMORY_CACHE** equal to *1*
 <br />Though it will work only if your **NODE_ENV** equals *development*
