@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "bluebird": "^3.4.7",
-    "debug": "^2.2.0",
+    "debug": "^2.6.1",
     "ioredis": "^2.5.0",
     "node-cache": "^4.1.1",
     "redlock": "^2.1.0"

@@ -1,6 +1,7 @@
 'use strict'
 
 const Promise = require('bluebird')
+const debug = require('debug')('advanced-cache:usage')
 
 const advancedCache = require('./')
 
@@ -13,7 +14,7 @@ const cache = new RedisCache({
   keyPrefix: 'usage-test:'
 })
 
-const policy = new CachePolicy(['code', 2], 60)
+const policy = new CachePolicy(['code', 2], 10, 10)
 
 function loadFn() {
   return Promise.delay(100).then(() => Promise.resolve('BY'))
@@ -26,6 +27,6 @@ return Promise
     cache.stringFetch(policy, loadFn)
   ])
   .then(x => {
-    console.log(x)
-    process.exit(1)
+    debug(x)
+    //process.exit(1)
   })
