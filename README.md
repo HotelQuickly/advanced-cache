@@ -47,7 +47,8 @@ Note: caches value only if result of load function is converted to true: `!!resu
   const MemoryCache = advancedCache.MemoryCache
   const CachePolicy = advancedCache.CachePolicy
 
-  const cache = new MemoryCache()
+  const opts = {useClones: false} //default opts
+  const cache = new MemoryCache(opts)
   
   const countryCachePolicy = new CachePolicy(['country-code', 5], 24 * 60 * 60)
   cache.fetch(countryCachePolicy, loadPromise).then(countryCode => {})
