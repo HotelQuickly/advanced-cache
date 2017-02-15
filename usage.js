@@ -22,9 +22,9 @@ function loadFn() {
 
 return Promise
   .all([
-    cache.stringFetch(policy, loadFn),
-    cache.stringFetch(policy, loadFn),
-    cache.stringFetch(policy, loadFn)
+    cache.asString(policy, loadFn),
+    cache.asString(policy, loadFn),
+    cache.asString(policy, loadFn)
   ])
   .then(x => {
     debug(x)

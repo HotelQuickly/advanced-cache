@@ -44,7 +44,7 @@ Note: caches value only if result of load function is converted to true: `!!resu
 ```js
   const advancedCache = require('advanced-cache')
 
-  const MemoryCache = advancedCache.MemoryCache
+  const MemoryCache = advancedCache.MemoryCache //extended from NodeCache
   const CachePolicy = advancedCache.CachePolicy
 
   const opts = {useClones: false} //default opts
@@ -52,8 +52,6 @@ Note: caches value only if result of load function is converted to true: `!!resu
   
   const countryCachePolicy = new CachePolicy(['country-code', 5], 24 * 60 * 60)
   cache.fetch(countryCachePolicy, loadPromise).then(countryCode => {})
- //when you need direct access to NodeCache
-  cache.set(countryCachePolicy.key, someValue, countryCachePolicy.ttl)
 ```
 
 # How to bypass cache
