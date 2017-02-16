@@ -1,27 +1,32 @@
 'use strict'
 
-const Cache = require('./index')
-const CachePolicy = require('./index').CachePolicy
 const Promise = require('bluebird')
-const debug = require('debug')('usage')
+const debug = require('debug')('advanced-cache:usage')
 
-const cache = new Cache({
+const advancedCache = require('./')
+
+const RedisCache = advancedCache.RedisCache
+const CachePolicy = advancedCache.CachePolicy
+
+const cache = new RedisCache({
   port: 6379,
-  host: '192.168.99.100',
-  keyPrefix: 'awesome:'
+  host: '127.0.0.1',
+  keyPrefix: 'usage-test:'
 })
 
-const policy = new CachePolicy(['code', 2], 60)
+const policy = new CachePolicy(['code', 2], 10, 10)
 
 function loadFn() {
   return Promise.delay(100).then(() => Promise.resolve('BY'))
 }
 
-Promise.join(
-  cache.asString(policy, loadFn).then(() => debug('1st finished')),
-  cache.asString(policy, loadFn).then(() => debug('2nd finished')),
-  cache.asString(policy, loadFn).then(() => debug('3rd finished')),
-  function () {
-    debug('all finished')
-  }
-)
+return Promise
+  .all([
+    cache.asString(policy, loadFn),
+    cache.asString(policy, loadFn),
+    cache.asString(policy, loadFn)
+  ])
+  .then(x => {
+    debug(x)
+    //process.exit(1)
+  })
