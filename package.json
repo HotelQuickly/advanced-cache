@@ -27,7 +27,7 @@
     "node": ">=5.0.0"
   },
   "scripts": {
-    "test": "npm run utest && npm run eslint",
+    "test": "npm run eslint && npm run utest",
     "utest": "mocha $(find ./lib -name *.test.js)",
     "eslint": "eslint *.js ./lib/** ./test/**"
   },

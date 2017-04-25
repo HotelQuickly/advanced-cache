@@ -32,10 +32,17 @@ Note: caches value only if result of load function is converted to true: `!!resu
 
   const cache = new RedisCache(ioRedisOpts, opts, redlockOpts) //opts and redlockOpts are optional and have defaults
 
+  //string value
   const countryCachePolicy = new CachePolicy(['country-code', 5], 24 * 60 * 60)
+  cache.stringFetch(countryCachePolicy, loadAsStringFnPromise, loadFnArgs).then(countryCode => {})
+
+  //js object as JSON
   const userCachePolicy = new CachePolicy(['user', 12], 60 * 60)
-  cache.stringFetch(countryCachePolicy, loadAsStringPromise).then(countryCode => {})
-  cache.serializedFetch(userCachePolicy, loadAsObjectPromise).then(user => user.fly())
+  cache.serializedFetch(userCachePolicy, loadAsObjectFnPromise, loadFnArgs).then(user => user.fly())
+
+  //js object as hash
+  cache.hashFetch(userCachePolicy, loadAsObjectFnPromise, loadFnArgs).then(user => user.fly())
+
  //when you need direct access to redis client
   cache.redis.mget(['country-code:13', 'user:12']).then(() => {})
 ```
