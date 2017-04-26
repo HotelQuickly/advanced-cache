@@ -1,6 +1,6 @@
 {
   "name": "advanced-cache",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Advanced redis cache with lock function",
   "main": "index.js",
   "author": "Dzmitry Frolov <dzmitryfrolov@gmail.com>",
@@ -27,7 +27,7 @@
     "node": ">=5.0.0"
   },
   "scripts": {
-    "test": "npm run utest && npm run eslint",
+    "test": "npm run eslint && npm run utest",
     "utest": "mocha $(find ./lib -name *.test.js)",
     "eslint": "eslint *.js ./lib/** ./test/**"
   },
