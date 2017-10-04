@@ -1,19 +1,22 @@
-# Advanced cache based on ioredis, redlock and node-cache 
+# Advanced cache based on ioredis, redlock and node-cache
+
+[![npm](https://img.shields.io/npm/v/advanced-cache.svg?style=flat-square)](https://npm.im/advanced-cache)
+[![Travis](https://img.shields.io/travis/tuananh/advanced-cache.svg?label=Linux%20%26%20macOS&style=flat-square)](https://travis-ci.org/tuananh/advanced-cache)
 
 Main points to have this module are:
  * reduce load on data storage on cold start
  * unify repetitive actions as: get from cache if not load from db
  * reload cache before it expires
- 
+
 Note: caches value only if result of load function is converted to true: `!!result === true`
- 
+
 # How to use RedisCache
 ```js
   const advancedCache = require('advanced-cache')
-  
+
   const RedisCache = advancedCache.RedisCache
   const CachePolicy = advancedCache.CachePolicy
-  
+
   const ioRedisOpts = {
     port: 6379,
     host: '127.0.0.1',
@@ -24,7 +27,7 @@ Note: caches value only if result of load function is converted to true: `!!resu
   const redlockOpts = {
     retryCount: 0 //default
   }
-  
+
   const opts = {
     lockIntervalMs: 1000, //time in ms key is locked to load data from store (default)
     retryIntervalMs: 50  //time failed lock waits before next try (default)
@@ -56,7 +59,7 @@ Note: caches value only if result of load function is converted to true: `!!resu
 
   const opts = {useClones: false} //default opts
   const cache = new MemoryCache(opts)
-  
+
   const countryCachePolicy = new CachePolicy(['country-code', 5], 24 * 60 * 60)
   cache.fetch(countryCachePolicy, loadPromise).then(countryCode => {})
 ```

@@ -1,0 +1,20 @@
+language: node_js
+os:
+  - linux
+  - osx
+node_js:
+  - '6'
+  - '7'
+  - '8'
+cache:
+  directories:
+    - $HOME/.npm
+before_install:
+  - echo node --version
+  - echo npm --version
+  - echo $TRAVIS_BRANCH
+  - echo `git describe --tags --always HEAD`
+  - npm config set progress false
+  - npm config set spin false
+script:
+  - npm test
